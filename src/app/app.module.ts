@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import {InputTextModule} from 'primeng/inputtext';
+import {ButtonModule} from 'primeng/button';
+import {TableModule} from 'primeng/table';
+import {TooltipModule} from 'primeng/tooltip';
 
 import { AppComponent } from './app.component';
-
-import {ButtonModule} from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,9 @@ import {ButtonModule} from 'primeng/button';
   imports: [
     BrowserModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    TableModule,
+    TooltipModule
 
   ],
   providers: [],
