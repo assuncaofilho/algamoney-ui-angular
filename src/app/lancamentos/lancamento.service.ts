@@ -3,10 +3,12 @@ import { Injectable, Component } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 
-export interface LancamentoFiltro {
+export class LancamentoFiltro {
   descricao?: string;
   dataVencimentoInicio?: Date; // variable? -> variáveis opcionais
   dataVencimentoFim?: Date;
+  pagina = 0;
+  itensPorPagina = 5;
 }
 
 @Injectable({
@@ -27,6 +29,9 @@ export class LancamentoService {
 
       let params = new HttpParams();
 
+      params = params.set('page', filtro.pagina);
+      params = params.set('size', filtro.itensPorPagina);
+
       if (filtro.descricao) {
         params = params.set('descricao', filtro.descricao);
       }
@@ -39,10 +44,18 @@ export class LancamentoService {
       }
       return this.http.get(`${this.lancamentosUrl}?resumo`, {headers:headers , params:params})
       .toPromise()
-      .then((response : any) =>
+      .then((response : any) => {
+        const lancamentos = response['content'];
+        const resultado = {
+          lancamentos: lancamentos,
+          total: response['totalElements']
+        };
 
-        response['content']);
-      }
+        return resultado;
+
+      })
+    }
+
 
   }
 
