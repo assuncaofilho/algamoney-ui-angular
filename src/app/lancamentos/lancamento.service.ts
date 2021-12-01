@@ -8,7 +8,7 @@ export class LancamentoFiltro {
   dataVencimentoInicio?: Date; // variable? -> variáveis opcionais
   dataVencimentoFim?: Date;
   pagina = 0;
-  itensPorPagina = 5;
+  itensPorPagina = 3;
 }
 
 @Injectable({
