@@ -15,7 +15,7 @@ export class PessoasService {
 
 
 
-  pessoasUrl = 'http://localhost:8080/pessoas'
+  pessoasUrl = 'http://localhost:8080/pessoas';
 
   constructor( private http: HttpClient) { }
 
@@ -43,6 +43,37 @@ export class PessoasService {
       };
       return resultado;
     })
+
+  }
+
+  listarTodas(): Promise<any> {
+    const headers = new HttpHeaders();
+    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.http.get(this.pessoasUrl, { headers })
+      .toPromise()
+      .then((response:any) => response['content']);
+  }
+
+  excluir(codigo: number): Promise<null> {
+
+    const headers = new HttpHeaders()
+    .append('Authorization' , 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.http.delete(`${this.pessoasUrl}/${codigo}`, { headers: headers })
+    .toPromise()
+    .then(() => null);
+  }
+
+  mudarStatus(codigo: number, ativo: boolean): Promise<null> {
+
+    const headers = new HttpHeaders()
+    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+    .append('Content-Type', 'application/json');
+
+    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, { headers: headers })
+    .toPromise()
+    .then(() => null);
 
   }
 }
