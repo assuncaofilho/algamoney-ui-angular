@@ -11,7 +11,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ErrorHandlerService } from './error-handler.service';
 import { HttpLoaderFactory } from '../app.module';
 import { LancamentoService } from '../lancamentos/lancamento.service';
-import { PessoasService } from '../pessoas/pessoas.service';
+import { PessoasService } from '../pessoas-pesquisa/pessoas.service';
+
 
 
 

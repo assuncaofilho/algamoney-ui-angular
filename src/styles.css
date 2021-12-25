@@ -6,6 +6,10 @@ body {
   color: #404C51;
 }
 
+a {
+  color: #337ab7;
+}
+
 label {
   font-weight: bold;
 }
@@ -80,6 +84,14 @@ label {
 
   .col-acoes .p-button {
     margin: 1px;
+  }
+
+  .p-button {
+    margin-right: .25em;
+  }
+
+  .p-message-error {
+    padding: 3px;
   }
 
 }

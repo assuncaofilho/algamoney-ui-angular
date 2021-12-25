@@ -1,6 +1,8 @@
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
+
+import { Pessoa } from '../core/model';
 
 export class PessoaFiltro {
   nome?: string;
@@ -47,12 +49,16 @@ export class PessoasService {
   }
 
   listarTodas(): Promise<any> {
-    const headers = new HttpHeaders();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
+    const headers = new HttpHeaders()
+    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    /*
     return this.http.get(this.pessoasUrl, { headers })
       .toPromise()
       .then((response:any) => response['content']);
+      */
+      return this.http.get(`${this.pessoasUrl}`, { headers })
+      .toPromise()
+      .then((response:any) => response.content);
   }
 
   excluir(codigo: number): Promise<null> {
@@ -63,6 +69,15 @@ export class PessoasService {
     return this.http.delete(`${this.pessoasUrl}/${codigo}`, { headers: headers })
     .toPromise()
     .then(() => null);
+  }
+
+  adicionar(pessoa: Pessoa): Promise<Pessoa> {
+    const headers = new HttpHeaders()
+    .append('Authorization' , 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+    .append('Content-Type', 'application/json');
+
+    return this.http.post<Pessoa>(this.pessoasUrl, pessoa, { headers })
+    .toPromise();
   }
 
   mudarStatus(codigo: number, ativo: boolean): Promise<null> {
