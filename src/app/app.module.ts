@@ -32,7 +32,7 @@ import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada.compo
 import { AppRoutingModule } from './app-routing.module';
 
 
-
+//teste para commitar!
 
 registerLocaleData(localePt, 'pt-BR')
 
