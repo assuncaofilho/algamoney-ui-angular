@@ -3,7 +3,7 @@
 
     <div class="grid">
       <div class="col-12">
-        <h1>Novo Lançamento</h1>
+        <h1> {{ editando ? 'Edição de' : 'Novo'}} Lançamento</h1>
       </div>
 
       <div class="col-12">
@@ -52,12 +52,12 @@
         [(ngModel)]="lancamento.valor" name="valor" #valor="ngModel" [required]="true"></p-inputNumber>
       </div>
       <div class="col-12 md:col-6 p-fluid">
-        <label>Categoria {{ categoria.value }}</label>
+        <label>Categoria </label> <!-- {{ categoria.value }} -->
         <p-dropdown [options]="categorias" placeholder="Selecione" name="categoria"
         [(ngModel)]="lancamento.categoria.codigo" #categoria="ngModel" [required]="true"></p-dropdown>
       </div>
       <div class="col-12 md:col-6 p-fluid">
-        <label>Pessoa {{ pessoa.value }} </label>
+        <label>Pessoa  </label> <!-- {{ pessoa.value }} -->
         <p-dropdown [options]="pessoas" placeholder="Selecione" name="pessoa"
         [(ngModel)]="lancamento.pessoa.codigo" #pessoa="ngModel" [filter]="true" [required]="true"></p-dropdown>
       </div>
@@ -68,8 +68,9 @@
       </div>
       <div class="col-12">
         <button pButton type="submit" label="Salvar" style="margin: 2px;" [disabled]="f.invalid"></button>
-        <button pButton type="button" label="Novo" class="p-button-info" style="margin: 2px;"></button>
-        <a href="javascript:;" style="margin: 2px;">Voltar para a pesquisa</a>
+        <button pButton type="button" label="Novo" class="p-button-info" style="margin: 2px;"
+        (click)="novo(f)"></button>
+        <a routerLink="/lancamentos" style="margin: 2px;">Voltar para a pesquisa</a>
       </div>
     </div>
 

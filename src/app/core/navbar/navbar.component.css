@@ -42,3 +42,7 @@
   color: #fff;
   font-size: large;
 }
+
+.navbar-menuitem.ativo {
+  background-color: #494541;
+}

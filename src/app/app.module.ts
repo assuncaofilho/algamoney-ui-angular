@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import localePt from '@angular/common/locales/pt';
+import { RouterModule, Routes } from '@angular/router';
 
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
@@ -22,11 +23,14 @@ import {MessageModule} from 'primeng/message';
 
 import { CoreModule } from './core/core.module';
 import { AppComponent } from './app.component';
-import { LancamentosPesquisaComponent } from './lancamentos/lancamentos-pesquisa.component';
+import { LancamentosPesquisaComponent } from './lancamento/lancamento-pesquisa/lancamentos-pesquisa.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
-import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
-import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
-import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
+import { PessoasPesquisaComponent } from './pessoa/pessoas-pesquisa/pessoas-pesquisa.component';
+import { LancamentoCadastroComponent } from './lancamento/lancamento-cadastro/lancamento-cadastro.component';
+import { PessoaCadastroComponent } from './pessoa/pessoa-cadastro/pessoa-cadastro.component';
+import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada.component';
+import { AppRoutingModule } from './app-routing.module';
+
 
 
 
@@ -61,7 +65,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     DropdownModule,
     InputNumberModule,
     InputMaskModule,
-    MessageModule
+    MessageModule,
+    AppRoutingModule,
+
+
 
 
 

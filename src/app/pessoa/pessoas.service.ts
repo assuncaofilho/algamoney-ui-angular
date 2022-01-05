@@ -80,6 +80,18 @@ export class PessoasService {
     .toPromise();
   }
 
+  atualizar(pessoa: Pessoa): Promise<Pessoa> {
+
+    const headers = new HttpHeaders()
+    .append('Authorization' , 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+    .append('Content-Type', 'application/json');
+
+    return this.http.put<Pessoa>(
+      `${this.pessoasUrl}/${pessoa.codigo}`, pessoa, { headers })
+      .toPromise();
+
+  }
+
   mudarStatus(codigo: number, ativo: boolean): Promise<null> {
 
     const headers = new HttpHeaders()
@@ -90,5 +102,21 @@ export class PessoasService {
     .toPromise()
     .then(() => null);
 
+  }
+
+  buscarPorCodigo(codigo: number): Promise<Pessoa> {
+
+    const headers = new HttpHeaders()
+    .append('Authorization' , 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+    .append('Content-Type', 'application/json');
+
+    return this.http.get<Pessoa>(
+      `${this.pessoasUrl}/${codigo}`, { headers })
+      .toPromise()
+      .then((response:any) => {
+        //this.converterStringsParaDatas([response]);
+        console.log(response);
+        return response;
+      });
   }
 }

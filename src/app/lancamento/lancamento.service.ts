@@ -1,4 +1,4 @@
-import { Lancamento } from './../core/model';
+import { Lancamento } from '../core/model';
 import { Injectable, Component } from '@angular/core';
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -77,7 +77,48 @@ export class LancamentoService {
       .toPromise();
     }
 
+    atualizar(lancamento: Lancamento): Promise<Lancamento> {
 
+      const headers = new HttpHeaders()
+      .append('Authorization' , 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+      .append('Content-Type', 'application/json');
+
+      return this.http.put<Lancamento>(
+        `${this.lancamentosUrl}/${lancamento.codigo}`, lancamento, { headers })
+        .toPromise();
+
+    }
+
+    buscarPorCodigo(codigo: number): Promise<Lancamento> {
+
+      const headers = new HttpHeaders()
+      .append('Authorization' , 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+      .append('Content-Type', 'application/json');
+
+      return this.http.get<Lancamento>(
+        `${this.lancamentosUrl}/${codigo}`, { headers })
+        .toPromise()
+        .then((response:any) => {
+          this.converterStringsParaDatas([response]);
+          console.log(response);
+          return response;
+        });
+    }
+
+    private converterStringsParaDatas(lancamentos: any[]) {
+
+      for (const lancamento of lancamentos) {
+
+      //Evita bug na hora da edição, adiciona o timezone do usuário
+      let offset = new Date().getTimezoneOffset() * 60000;
+
+        lancamento.dataVencimento = new Date(new Date(lancamento.dataVencimento).getTime() + offset);
+
+        if (lancamento.dataPagamento) {
+          lancamento.dataPagamento = new Date(new Date(lancamento.dataPagamento).getTime() + offset);
+        }
+      }
+    }
   }
 
 

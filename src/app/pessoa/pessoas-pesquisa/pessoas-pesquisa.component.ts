@@ -1,9 +1,12 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+
 import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { ErrorHandlerService } from '../core/error-handler.service';
-import { PessoasService, PessoaFiltro } from './pessoas.service';
+
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { PessoasService, PessoaFiltro } from '../pessoas.service';
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -21,10 +24,12 @@ export class PessoasPesquisaComponent implements OnInit{
     private pessoasService: PessoasService,
     private messageService: MessageService,
     private confirmation: ConfirmationService,
-    private errorHandler: ErrorHandlerService) { }
+    private errorHandler: ErrorHandlerService,
+    private title: Title) { }
 
   ngOnInit() {
   //  this.pesquisar();
+  this.title.setTitle('Pesquisa de pessoas');
   }
 
 
